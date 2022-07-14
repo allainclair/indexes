@@ -1,0 +1,27 @@
+[project]
+name = "Indexes"
+version = ""
+description = ""
+authors = [
+    {name = "Allainclair", email = "allainclair@gmail.com"},
+]
+dependencies = []
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+[project.urls]
+Homepage = ""
+
+[project.optional-dependencies]
+[tool]
+[tool.pdm]
+[tool.pdm.dev-dependencies]
+test = [
+    "icecream>=2.1.2",
+    "ipython>=8.1.1",
+    "pytest>=7.0.1",
+]
+
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
