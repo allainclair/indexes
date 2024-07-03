@@ -1,0 +1,8 @@
+Indexes.egg-info/
+build/
+
+*.py[cod]
+.venv
+.env
+.coverage
+.idea/

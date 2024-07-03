@@ -1,0 +1,85 @@
+[project]
+
+name = "Indexes"
+version = "0.1.0"
+description = "Brazil's economic indexes"
+authors = [
+    {name = "Allainclair Flausino dos Santos", email = "allainclair@withmartian.com"},
+]
+
+dependencies = [
+    "httpx>=0.27.0",
+    "litestar[jinja]>=2.9.1",
+    "pydantic>=2.8.0",
+    "pydantic-settings>=2.3.4",
+    "uvicorn>=0.30.1",
+]
+
+[project.optional-dependencies]
+test = [
+    "coverage",
+    "pytest",
+    "pytest-asyncio",
+#    "setuptools",
+]
+lint = [
+    "ruff",
+    "mypy",
+]
+debug= [
+    "rich",
+    "ipython",
+]
+
+[tool.ruff]
+line-length = 80
+
+# Suggestions to add to select: EM
+lint.select = [
+	"E",
+	"F",
+	"I",
+	"W",
+	"N",
+	"COM",
+	"C4",
+	"PIE",
+	"T20",
+	"Q",
+	"RET",
+	"SIM",
+	"ARG",
+	"PGH",
+	"RUF",
+]
+lint.ignore = [
+	# https://docs.astral.sh/ruff/formatter/#format-suppression
+	"E111",  # https://docs.astral.sh/ruff/rules/indentation-with-invalid-multiple/
+	"E114",  # https://docs.astral.sh/ruff/rules/indentation-with-invalid-multiple-comment/
+	# "E117",  # https://docs.astral.sh/ruff/rules/over-indented/
+	# "D206",  # https://docs.astral.sh/ruff/rules/indent-with-spaces/
+	# "D300",  # https://docs.astral.sh/ruff/rules/triple-single-quotes/
+	# "ISC001", # https://docs.astral.sh/ruff/rules/single-line-implicit-string-concatenation/
+	# "ISC002",  # https://docs.astral.sh/ruff/rules/multi-line-implicit-string-concatenation/
+	# "Q001",  # https://docs.astral.sh/ruff/rules/bad-quotes-multiline-string/
+	# "Q002",  # https://docs.astral.sh/ruff/rules/bad-quotes-docstring/
+	# "Q003",  # https://docs.astral.sh/ruff/rules/avoidable-escaped-quote/
+	"W191",  # https://docs.astral.sh/ruff/rules/tab-indentation/
+	"RUF009",  # https://docs.astral.sh/ruff/rules/function-call-in-dataclass-default-argument/
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"  # Use `\n` line endings for all files
+
+[tool.ruff.lint.isort]
+case-sensitive = true
+split-on-trailing-comma = false
+
+[tool.mypy]
+strict = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+log_cli = true

@@ -1,42 +1,24 @@
-## Frontend
+# Brazil's economic indexes
 
-### React
+## Config
 
-0. Create folder webapp and `$ cd webapp`.
+* Create a .env file, you can use the .env.example file as a template.
+* Check the PORT=8000, this will be the port to access e.g.: http://127.0.0.1:8000
 
-1. `$ npx create-react-app frontend`.
+## To run without docker
 
-2. Remove unnecessary files from installation.
+### Install [uv](https://github.com/astral-sh/uv?tab=readme-ov-file#getting-started) package manager
 
-3. `$ cd webapp/frontend/`.
+https://github.com/astral-sh/uv?tab=readme-ov-file#getting-started
 
-## Material
+### Build dependencies and run the app
 
-`$ npm install @material-ui/core`
-
-`npm install fontsource-roboto`  Talvez nao precise
-
-## Recharts
-
-`$ npm install recharts`
-
-## Nivo NOT USED. dependency issues
-
-yarn add @nivo/core @nivo/line
-
-### Chakra UI -- Not needed yet
-
-4. `$ npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion`
-
-### Deploy github pages
-
-https://create-react-app.dev/docs/deployment/
-
-```
-# package.json
-"script": {
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -b BRANCH_OF_THE_SITE -d build",
-}
+```sh
+make install-venv-dev  # Create virtual environment and install deps
+make run-venv-dev  # Run dev http://127.0.0.1:8000
 ```
 
+## To run inside docker
+
+```sh
+docker compose up --build
