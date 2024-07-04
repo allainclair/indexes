@@ -10,12 +10,16 @@ class Settings(BaseSettings):
 		env_file_encoding="utf-8",
 	)
 
+	bcb_base: HttpUrl = HttpUrl("https://api.bcb.gov.br/dados/serie/")
+	bcb_date_format: str = "%d/%m/%Y"
 	debug: bool = False
+
+	# https://servicodados.ibge.gov.br/api/docs/agregados?versao=3
+	# Use Query Builder for a faster understanding.
+	ibge_url_ipca_base: HttpUrl = HttpUrl("https://servicodados.ibge.gov.br/api/v3/agregados/1737/periodos/")
 
 	# Used only at the moment for "make" and "docker".
 	port: int | None = None
-	bcb_url_base: HttpUrl = HttpUrl("https://api.bcb.gov.br/dados/serie/")
-	bcb_date_format: str = "%d/%m/%Y"
 
 
 @lru_cache

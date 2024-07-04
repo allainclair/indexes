@@ -10,6 +10,7 @@ class ConnectionName(StrEnum):
 
 
 bcb_connection: AsyncClient | None = None
+ibge_connection: AsyncClient | None = None
 
 
 def get_connection(name: ConnectionName) -> AsyncClient:
@@ -27,6 +28,15 @@ def get_bcb_connection() -> AsyncClient:
 	return bcb_connection
 
 
+def get_ibge_connection() -> AsyncClient:
+	global ibge_connection
+	if ibge_connection is None:
+		ibge_connection = AsyncClient(base_url=str(settings.ibge_url_ipca_base))
+		return ibge_connection
+
+	return ibge_connection
+
+
 async def close_bcb_connection() -> None:
 	global bcb_connection
 	if bcb_connection is not None:
@@ -34,3 +44,12 @@ async def close_bcb_connection() -> None:
 		bcb_connection = None
 
 	return bcb_connection
+
+
+async def close_ibge_connection() -> None:
+	global ibge_connection
+	if ibge_connection is not None:
+		await ibge_connection.aclose()
+		ibge_connection = None
+
+	return ibge_connection

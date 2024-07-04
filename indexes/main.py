@@ -8,15 +8,17 @@ from litestar.response import Template
 from litestar.static_files import create_static_files_router
 from litestar.template.config import TemplateConfig
 from indexes.settings import get_settings
-from indexes.apis.bcb import get_last_ipca
+from indexes.apis.ibge import get_last_two_ipca_variations
+from indexes.models.ipca import map_ibge_to_view
 
+
+# TODO: Add context to open/close httpx connections
 
 @get(path="/")
 async def index() -> Template:
-	current_ipca = await get_last_ipca()
-	return HTMXTemplate(template_name="index.html.jinja2", context={
-		"current_ipca": current_ipca,
-	})
+	ipcas = await get_last_two_ipca_variations()
+	ipca_views = map_ibge_to_view(ipcas)
+	return HTMXTemplate(template_name="index.html.jinja2", context={"ipcas": ipca_views})
 
 
 def build_app() -> Litestar:
