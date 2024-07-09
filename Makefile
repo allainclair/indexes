@@ -101,4 +101,4 @@ docker-prod-build:
 
 docker-prod-run: docker-prod-build
 	docker rm -f $(TAG_PROD) || true
-	docker run -p $(HOST_PORT):$(PORT) --name $(TAG_PROD) $(TAG_PROD)
+	docker run -p $(HOST_PORT):$(PORT) --detach --name $(TAG_PROD) $(TAG_PROD)
