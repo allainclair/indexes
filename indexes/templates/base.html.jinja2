@@ -3,7 +3,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>{% block title %}Economic Indexes{% endblock %}</title>
+	<title>{% block title %}Índices Econômicos{% endblock %}</title>
 
 	<!-- TODO: Build the following remote packages -->
 	<script src="https://unpkg.com/htmx.org@2.0.0"></script>
@@ -12,31 +12,84 @@
 	{% block head %}{% endblock %}
 
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 flex flex-col min-h-screen">
 
 	<nav class="bg-gray-800 shadow-lg">
 		<div class="container mx-auto px-4">
 
 			<div class="flex items-center">
 				<div class="mt-3">
-					<a href="#" class="text-gray-200 hover:text-blue-400 font-semibold text-lg">
-						Home
-					</a>
-					<span class="h-1.5 mt-2 bg-blue-400 block w-full"></span>
-				</div>
-
-				<div class="mt-3 ml-4">
-					<a href="#" class="text-gray-200 hover:text-blue-400 font-semibold text-lg">
+					<a href="/" class="text-gray-200 hover:text-yellow-400 font-semibold text-lg">
 						IPCA
 					</a>
-					<span class="h-1.5 mt-2 bg-gray-800 block w-full"></span>
+					<span class="h-1.5 mt-2 bg-yellow-400 block w-full"></span>
 				</div>
+
+{#				<div class="mt-3 ml-4">#}
+{#					<a href="#" class="text-gray-200 hover:text-yellow-400 font-semibold text-lg">#}
+{#						IPCA#}
+{#					</a>#}
+{#					<span class="h-1.5 mt-2 bg-gray-800 block w-full"></span>#}
+{#				</div>#}
 
 			</div>
 		</div>
 	</nav>
 
-	{% block content %}{% endblock %}
+	<main class="flex-grow">
+		{% block content %}{% endblock %}
+	</main>
+
+	<footer class="bg-gray-800 mt-10">
+		<div class="container mx-auto px-4 py-6">
+			<div class="flex justify-between items-center">
+
+				<div class="text-gray-200">
+					<p>
+						Mantido por
+						<a class="text-gray-200 hover:text-yellow-400" href="http://allainclair.com">
+							Allainclair Flausino dos Santos
+						</a>
+					</p>
+				</div>
+
+				<div class="flex space-x-2">
+					<a href="mailto:allainclair@gmail.com">
+						<img alt="allainclair@gmail.com" src="https://img.shields.io/badge/contato-D14836?style=flat-square&logo=gmail&logoColor=white" class="rounded-md">
+					</a>
+					<a href="https://github.com/allainclair/indexes">
+						<img alt="Indexes' GitHub" src="https://img.shields.io/badge/GitHub-0366d6?style=flat-square&logo=github&logoColor=white" class="rounded-md">
+					</a>
+				</div>
+
+			</div>
+
+			<div class="mt-4 text-center text-gray-200">
+				<p>Tech stack</p>
+				<div class="flex justify-center space-x-2 items-center">
+					<a href="https://www.python.org/">
+						<img alt="Python" src="https://img.shields.io/badge/Python-306998?style=flat-square&logo=python&logoColor=ffdd54" class="rounded-md">
+					</a>
+					<a href="https://www.docker.com">
+						<img alt="Docker" src="https://img.shields.io/badge/Docker-46a2f1?style=flat-square&logo=docker&logoColor=white" class="rounded-md">
+					</a>
+					<a href="https://htmx.org">
+						<img alt="htmx" src="https://img.shields.io/badge/htmx-4169e1?style=flat-square&logo=htmx&logoColor=black" class="rounded-md">
+					</a>
+					<a href="https://www.oracle.com/cloud/">
+						<img alt="Oracle" src="https://img.shields.io/badge/Oracle-F80000?style=flat-square&logo=oracle&logoColor=white" class="rounded-md">
+					</a>
+					<a href="https://tailwindcss.com">
+						<img alt="tailwindcss" src="https://img.shields.io/badge/tailwindcss-0F172A?style=flat-square&logo=tailwindcss" class="rounded-md">
+					</a>
+					<a href="https://litestar.dev">
+						<img alt="Litestar" src="https://litestar.dev/_static/logo.svg" width="50" height="50">
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</footer>
 
 </body>
 </html>
