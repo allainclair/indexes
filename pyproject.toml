@@ -8,11 +8,13 @@ authors = [
 ]
 
 dependencies = [
-    "babel>=2.15.0",
-    "litestar[jinja]>=2.9.1",
-    "pydantic>=2.8.0",
-    "pydantic-settings>=2.3.4",
-    "uvicorn>=0.30.1",
+	"babel>=2.15.0",
+	"litestar[jinja,opentelemetry]>=2.9.1",
+	"logfire>=0.46.1",
+	"pydantic>=2.8.0",
+	"pydantic-settings>=2.3.4",
+	"opentelemetry-instrumentation-httpx>=0.46b0",
+	"uvicorn>=0.30.1",
 ]
 
 [project.optional-dependencies]

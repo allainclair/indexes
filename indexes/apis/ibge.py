@@ -1,9 +1,11 @@
-from collections.abc import Callable, Coroutine
-from datetime import UTC, date, datetime, timedelta
-from typing import Any
+from asyncio import sleep
+from datetime import date
+from logging import getLogger
 
 from indexes.httpx_connections import get_ibge_connection
 from indexes.models.ipca import IpcaIBGELastTwo
+
+logger = getLogger(__name__)
 
 ID_MONTHLY_VARIATION = "63"
 ID_THREE_MONTHS_ACCUMULATION = "2263"
@@ -18,12 +20,25 @@ IDS = [
 	ID_YEARLY_ACCUMULATION,
 ]
 
-_last_datetime: datetime | None = None
-_last_ipcas: list[IpcaIBGELastTwo] | None = None
+last_ipcas: list[IpcaIBGELastTwo] | None = None
 
 
-async def get_last_two_ipca_variations() -> list[IpcaIBGELastTwo]:
-	return await cache_ttl(_get_last_two_ipca_variations)
+def get_last_ipcas() -> list[IpcaIBGELastTwo]:
+	global last_ipcas
+	assert last_ipcas
+	return last_ipcas
+
+
+async def task_to_get_last_two_ipca_variations_hourly() -> None:
+	global last_ipcas
+	while True:
+		try:
+			last_ipcas = await _get_last_two_ipca_variations()
+			logger.info(f"Last IPCAS: {last_ipcas}")
+		except Exception as e:
+			logger.exception(e)
+
+		await sleep(3600)
 
 
 async def _get_last_two_ipca_variations() -> list[IpcaIBGELastTwo]:
@@ -70,19 +85,3 @@ async def _get_last_two_ipca_variations() -> list[IpcaIBGELastTwo]:
 		ipca_variations[-1],
 	)
 	return ipca_variations
-
-
-async def cache_ttl(
-	func: Callable[[], Coroutine[Any, Any, list[IpcaIBGELastTwo]]],
-	ttl: int = 3600,
-) -> list[IpcaIBGELastTwo]:
-	global _last_datetime
-	global _last_ipcas
-	now = datetime.now(UTC)
-
-	if not _last_datetime or now - _last_datetime > timedelta(seconds=ttl):
-		_last_ipcas = await func()
-		_last_datetime = now
-
-	assert _last_ipcas
-	return _last_ipcas
