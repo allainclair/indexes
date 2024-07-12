@@ -24,19 +24,18 @@ last_ipcas: list[IpcaIBGELastTwo] | None = None
 
 
 def get_last_ipcas() -> list[IpcaIBGELastTwo]:
-	global last_ipcas
 	assert last_ipcas
 	return last_ipcas
 
 
 async def task_to_get_last_two_ipca_variations_hourly() -> None:
-	global last_ipcas
+	global last_ipcas  # noqa: PLW0603
 	while True:
 		try:
 			last_ipcas = await _get_last_two_ipca_variations()
-			logger.info(f"Last IPCAS: {last_ipcas}")
-		except Exception as e:
-			logger.exception(e)
+			logger.info("Last IPCAS: %s", last_ipcas)
+		except Exception:
+			logger.exception("Failed to get last IPCAS")
 
 		await sleep(3600)
 
@@ -71,7 +70,7 @@ async def _get_last_two_ipca_variations() -> list[IpcaIBGELastTwo]:
 
 				ipca_last_two = IpcaIBGELastTwo(
 					id=id_,
-					name=ipca_variation.get("variavel").strip("IPCA - "),
+					name=ipca_variation.get("variavel").removeprefix("IPCA - "),
 					current_date=last_date,
 					previous_date=previous_date,
 					current_rate=last_result,

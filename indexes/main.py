@@ -37,8 +37,7 @@ async def _lifespan(_: Litestar) -> AsyncGenerator[None, None]:
 async def index() -> Template:
 	ipca_views = map_ibge_to_view(get_last_ipcas())
 	return HTMXTemplate(
-		template_name="index.html.jinja2",
-		context={"ipcas": ipca_views},
+		template_name="index.html.jinja2", context={"ipcas": ipca_views}
 	)
 
 
@@ -51,14 +50,12 @@ def build_app() -> Litestar:
 		request_class=HTMXRequest,
 		route_handlers=[
 			create_static_files_router(
-				"/static",
-				directories=["indexes/assets"],
+				"/static", directories=["indexes/assets"]
 			),
 			index,
 		],
 		template_config=TemplateConfig(
-			directory=Path("indexes/templates"),
-			engine=JinjaTemplateEngine,
+			directory=Path("indexes/templates"), engine=JinjaTemplateEngine
 		),
 	)
 

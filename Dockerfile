@@ -23,6 +23,7 @@ FROM base-python AS run-base
 RUN make install
 COPY indexes indexes
 
+
 EXPOSE ${PORT}
 FROM run-base AS run
 ENTRYPOINT ["make", "run"]
@@ -30,11 +31,13 @@ ENTRYPOINT ["make", "run"]
 
 FROM base-python AS base-dev
 RUN make install-dev
-COPY app app
+COPY indexes indexes
 COPY tests tests
+
 
 FROM base-dev AS run-lint
 ENTRYPOINT ["make", "run-lint"]
+
 
 FROM base-dev AS tests-run
 ENTRYPOINT ["make", "run-cov"]

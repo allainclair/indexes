@@ -37,37 +37,72 @@ line-length = 80
 
 # Suggestions to add to select: EM
 lint.select = [
-	"E",
-	"F",
-	"I",
-	"W",
-	"N",
+	"A",
+	"ARG",
+	"ANN",  # Take care if there is conflict with mypy.
+	"ASYNC",
+	"B",
+	"BLE",
 	"COM",
 	"C4",
+	"C90",
+	# "DTZ",  # https://docs.astral.sh/ruff/rules/#flake8-datetimez-dtz
+	"E",
+	"EM",
+	"EXE",
+	"F",
+	"FBT",
+	"FLY",
+	"FURB",
+	"G",
+	"I",
+	"ICN",
+	"INP",
+	"INT",
+	"ISC",
+	"LOG",
+	"N",
+	"PERF",
+	"PGH",
 	"PIE",
-	"T20",
+	"PL",
+	"PT",
+	"PTH",
+	"PYI",
 	"Q",
 	"RET",
-	"SIM",
-	"ARG",
-	"PGH",
+	"RSE",
 	"RUF",
+	"S",
+	"SIM",
+	"SLOT",
+	"SLF",
+	"T10",
+	"T20",
+	"TCH",
+	"TD",
+	"TID",
+	"TRY",
+	"UP",
+	"W",
+	"YTT"
 ]
 lint.ignore = [
-	# https://docs.astral.sh/ruff/formatter/#format-suppression
-	"E111",  # https://docs.astral.sh/ruff/rules/indentation-with-invalid-multiple/
-	"E114",  # https://docs.astral.sh/ruff/rules/indentation-with-invalid-multiple-comment/
-	# "E117",  # https://docs.astral.sh/ruff/rules/over-indented/
-	# "D206",  # https://docs.astral.sh/ruff/rules/indent-with-spaces/
-	# "D300",  # https://docs.astral.sh/ruff/rules/triple-single-quotes/
-	# "ISC001", # https://docs.astral.sh/ruff/rules/single-line-implicit-string-concatenation/
-	# "ISC002",  # https://docs.astral.sh/ruff/rules/multi-line-implicit-string-concatenation/
-	# "Q001",  # https://docs.astral.sh/ruff/rules/bad-quotes-multiline-string/
-	# "Q002",  # https://docs.astral.sh/ruff/rules/bad-quotes-docstring/
-	# "Q003",  # https://docs.astral.sh/ruff/rules/avoidable-escaped-quote/
+	"ANN401",  # https://docs.astral.sh/ruff/rules/any-type/
+
+	# The following rules may cause conflicts when used with the formatter: `COM812`.
+	"COM812",  # https://docs.astral.sh/ruff/rules/missing-trailing-comma/
+
+	# The following rules may cause conflicts when used with the formatter: `ISC001`
+	"ISC001",  # https://docs.astral.sh/ruff/rules/single-line-implicit-string-concatenation/
+
+	"S101",  # https://docs.astral.sh/ruff/rules/assert/"
+
+	# The `format.indent-style="tab"` option is incompatible with `W191`, which lints against all uses of tabs
 	"W191",  # https://docs.astral.sh/ruff/rules/tab-indentation/
-	"RUF009",  # https://docs.astral.sh/ruff/rules/function-call-in-dataclass-default-argument/
 ]
+
+lint.mccabe.max-complexity = 5
 
 [tool.ruff.format]
 quote-style = "double"

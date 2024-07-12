@@ -7,10 +7,11 @@ ibge_connection: httpx.AsyncClient | None = None
 
 
 def get_ibge_connection() -> httpx.AsyncClient:
-	global ibge_connection
+	global ibge_connection  # noqa: PLW0603
 	if ibge_connection is None:
 		ibge_connection = httpx.AsyncClient(
 			base_url=str(settings.ibge_url_ipca_base),
+			timeout=settings.http_timeout,
 		)
 		return ibge_connection
 
@@ -18,7 +19,7 @@ def get_ibge_connection() -> httpx.AsyncClient:
 
 
 async def close_ibge_connection() -> None:
-	global ibge_connection
+	global ibge_connection  # noqa: PLW0603
 	if ibge_connection is not None:
 		await ibge_connection.aclose()
 		ibge_connection = None

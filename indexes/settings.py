@@ -18,8 +18,10 @@ class Settings(BaseSettings):
 	)
 
 	# Used only at the moment for "make" and "docker".
-	host: str = "0.0.0.0"
+	host: str = "127.0.0.1"
 	port: int | None = None
+
+	http_timeout: int = 5
 
 
 @lru_cache

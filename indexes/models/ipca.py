@@ -9,7 +9,7 @@ from pydantic import BaseModel, BeforeValidator, Field
 
 from indexes.settings import get_settings
 
-env = Environment(loader=FileSystemLoader("indexes/templates"))
+env = Environment(loader=FileSystemLoader("indexes/templates"), autoescape=True)
 
 settings = get_settings()
 
