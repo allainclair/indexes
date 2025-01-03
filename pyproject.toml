@@ -29,7 +29,8 @@ lint = [
     "mypy",
 ]
 debug= [
-    "ipython",
+	"ipython",
+	"rich",
 ]
 
 [tool.ruff]
@@ -88,6 +89,7 @@ lint.select = [
 	"YTT"
 ]
 lint.ignore = [
+	"ANN101",  # https://docs.astral.sh/ruff/rules/missing-type-self/
 	"ANN401",  # https://docs.astral.sh/ruff/rules/any-type/
 
 	# The following rules may cause conflicts when used with the formatter: `COM812`.
@@ -96,7 +98,13 @@ lint.ignore = [
 	# The following rules may cause conflicts when used with the formatter: `ISC001`
 	"ISC001",  # https://docs.astral.sh/ruff/rules/single-line-implicit-string-concatenation/
 
+	# PLR2004 Magic value used in comparison
+	"PLR2004",  # https://docs.astral.sh/ruff/rules/magic-value-comparison/
+
 	"S101",  # https://docs.astral.sh/ruff/rules/assert/"
+
+	# TD003 Missing issue link on the line following this TODO
+	"TD003", # https://docs.astral.sh/ruff/rules/missing-todo-link/
 
 	# The `format.indent-style="tab"` option is incompatible with `W191`, which lints against all uses of tabs
 	"W191",  # https://docs.astral.sh/ruff/rules/tab-indentation/
